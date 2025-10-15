@@ -42,25 +42,31 @@ summary(resLFC)
 Visualization
 Boxplot
 boxplot(log2(counts(dds) + 1), main="Gene Expression Distribution")
+<img width="431" height="246" alt="Rplot04" src="https://github.com/user-attachments/assets/df2aea82-5376-46ad-b734-d9203e514c44" />
 
 MA Plot
 plotMA(resLFC, main="MA Plot: Treated vs Untreated", ylim=c(-5,5))
+<img width="431" height="246" alt="Rplot03" src="https://github.com/user-attachments/assets/81cc58fe-4116-4f62-9c8b-5b0ad707ca1b" />
 
 Volcano Plot (optional)
 ggplot(as.data.frame(res), aes(x=log2FoldChange, y=-log10(pvalue))) +
   geom_point(alpha=0.4) +
   theme_minimal() +
   ggtitle("Volcano Plot of Differential Expression")
+<img width="431" height="246" alt="Rplot" src="https://github.com/user-attachments/assets/3ed17220-9014-40d7-98f8-a87581b68686" />
+
 
 PCA Analysis
 vsd <- vst(dds, blind=FALSE)
 plotPCA(vsd, intgroup="dex")
+<img width="431" height="246" alt="Rplot02" src="https://github.com/user-attachments/assets/6e37308f-fa57-4752-a560-dddd016114f8" />
 
 Heatmap of Top Variable Genes
 topVarGenes <- head(order(rowVars(assay(vsd)), decreasing=TRUE), 50)
 pheatmap(assay(vsd)[topVarGenes,],
          cluster_rows=TRUE, show_rownames=FALSE,
          cluster_cols=TRUE, annotation_col=colData(vsd))
+<img width="431" height="246" alt="Rplot01" src="https://github.com/user-attachments/assets/00c66a97-28f9-4187-8063-33605df52558" />
 
 Save Results
 write.csv(as.data.frame(resLFC), "results/differential_expression_results.csv")
